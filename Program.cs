@@ -1,10 +1,20 @@
 using AlainaGarcia_Ap1_P1.Components;
+using AlainaGarcia_Ap1_P1.DAL;
+using AlainaGarcia_Ap1_P1.Service;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+//Inyeccion del contexto
+var ConStr = builder.Configuration.GetConnectionString("ConStr");
+builder.Services.AddDbContext<Contexto>(o => o.UseSqlite(ConStr));
+
+//Inyeccion del service
+builder.Services.AddScoped<RegistroService>();
 
 var app = builder.Build();
 
