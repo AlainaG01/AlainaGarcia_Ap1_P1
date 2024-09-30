@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlainaGarcia_Ap1_P1.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20240923233515_Initial")]
-    partial class Initial
+    [Migration("20240930224924_Segunda")]
+    partial class Segunda
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,19 +19,26 @@ namespace AlainaGarcia_Ap1_P1.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
-            modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.Registros", b =>
+            modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.Prestamos", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PrestamosId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Concepto")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Deudor")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                    b.ToTable("Registros");
+                    b.Property<double>("Monto")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("PrestamosId");
+
+                    b.ToTable("Prestamos");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,22 +5,24 @@
 namespace AlainaGarcia_Ap1_P1.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Segunda : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Registros",
+                name: "Prestamos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    PrestamosId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Nombre = table.Column<string>(type: "TEXT", nullable: false)
+                    Deudor = table.Column<string>(type: "TEXT", nullable: false),
+                    Concepto = table.Column<string>(type: "TEXT", nullable: false),
+                    Monto = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Registros", x => x.Id);
+                    table.PrimaryKey("PK_Prestamos", x => x.PrestamosId);
                 });
         }
 
@@ -28,7 +30,7 @@ namespace AlainaGarcia_Ap1_P1.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Registros");
+                name: "Prestamos");
         }
     }
 }
