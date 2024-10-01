@@ -6,7 +6,7 @@
 
 @*HTML*@
 <PageTitle>Modificar</PageTitle>
-<EditForm Model="Prestamo" OnInvalidSubmit="Modificar">
+<EditForm Model="Prestamo" OnValidSubmit="Modificar">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -45,6 +45,7 @@
         </div>
     </div>
 </EditForm>
+@Mensaje
 
 @code {
     [Parameter]
