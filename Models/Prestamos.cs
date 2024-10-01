@@ -9,11 +9,9 @@ public class Prestamos
     public int PrestamosId { get; set; }
 
     [Required(ErrorMessage = "Campo obligatorio")]
-    [RegularExpression("^[a-zA-Z/s]+$", ErrorMessage= "Solo letras no caracteres especiales")]
     public string Deudor {  get; set; }
 
     [Required(ErrorMessage = "Campo obligatorio")]
-    [RegularExpression("^[a-zA-Z/s]+$", ErrorMessage = "Solo letras no caracteres especiales")]
     public string Concepto { get; set; }
 
     [Required(ErrorMessage = "Campo obligatorio")]
