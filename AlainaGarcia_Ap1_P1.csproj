@@ -18,10 +18,4 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Data\RegistroPrestamos.Db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
