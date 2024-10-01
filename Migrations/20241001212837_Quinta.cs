@@ -5,7 +5,7 @@
 namespace AlainaGarcia_Ap1_P1.Migrations
 {
     /// <inheritdoc />
-    public partial class Cuarta : Migration
+    public partial class Quinta : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
