@@ -1,0 +1,66 @@
+﻿@page "/Registro/Create"
+
+@inject PrestamosService prestamosService
+@inject NavigationManager navigationManager
+@rendermode InteractiveServer
+
+@*HTML*@
+<PageTitle>Create</PageTitle>
+<EditForm Model="Prestamo" OnInvalidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="container">
+        <div class="shadow-lg">
+            <div class="card-header text-center">
+                <h5 class="card-title">Crear Prestamo</h5>
+            </div>
+
+            <div class="card-body flex-column d-flex align-content-center justify-content-center text-lg-center">
+                @*Deudor*@
+                <div class="col-4 ms-3">
+                    <label class="form-label"><strong>Deudor</strong></label>
+                    <InputText class="form-control" @bind-Value="Prestamo.Deudor"></InputText>
+                    <ValidationMessage For="(() => Prestamo.Deudor)" />
+                </div>
+                @*Concepto*@
+                <div class="col-4 ms-3">
+                    <label class="form-label"><strong>Concepto</strong></label>
+                    <InputText class="form-control" @bind-Value="Prestamo.Concepto"></InputText>
+                    <ValidationMessage For="(() => Prestamo.Concepto)" />
+                </div>
+                @*Monto*@
+                <div class="col-4 ms-3">
+                    <label class="form-label"><strong>Monto</strong></label>
+                    <InputNumber class="form-control" @bind-Value="Prestamo.Monto"></InputNumber>
+                    <ValidationMessage For="(() => Prestamo.Monto)" />
+                </div>
+            </div>
+
+            @*footer*@
+            <div class="card-footer text-center">
+                <a href="/Registro/Index" class="btn btn-primary"> <span class="bi bi-arrow-left"></span> Volver</a>
+                <button type="submit" class="btn btn-primary bi bi-floppy mt-3" @onclick="Guardar"> Guardar</button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    public Prestamos Prestamo { get; set; } = new Prestamos();
+    public string Mensaje { get; set; } = string.Empty;
+
+    public async Task Guardar()
+    {
+        var creado = await prestamosService.Guardar(Prestamo);
+
+        if (creado)
+        {
+            Mensaje = "Creado correctamente";
+        }
+        else
+        {
+            Mensaje = "No se ha creado correctamente";
+        }
+    }
+}
