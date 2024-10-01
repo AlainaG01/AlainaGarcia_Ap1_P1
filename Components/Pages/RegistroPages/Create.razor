@@ -6,7 +6,7 @@
 
 @*HTML*@
 <PageTitle>Create</PageTitle>
-<EditForm Model="Prestamo" OnInvalidSubmit="Guardar">
+<EditForm Model="Prestamo" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -45,6 +45,7 @@
         </div>
     </div>
 </EditForm>
+@Mensaje
 
 @code {
     public Prestamos Prestamo { get; set; } = new Prestamos();
