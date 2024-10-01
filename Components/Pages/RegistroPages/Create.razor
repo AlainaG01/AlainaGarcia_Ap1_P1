@@ -40,7 +40,7 @@
             @*footer*@
             <div class="card-footer text-center">
                 <a href="/Registro/Index" class="btn btn-primary"> <span class="bi bi-arrow-left"></span> Volver</a>
-                <button type="submit" class="btn btn-primary bi bi-floppy mt-3" @onclick="Guardar"> Guardar</button>
+                <button type="submit" class="btn btn-primary bi bi-floppy" @onclick="Guardar"> Guardar</button>
             </div>
         </div>
     </div>
@@ -57,6 +57,7 @@
         if (creado)
         {
             Mensaje = "Creado correctamente";
+            navigationManager.NavigateTo("/Registro/Index");
         }
         else
         {
