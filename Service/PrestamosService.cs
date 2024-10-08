@@ -45,7 +45,8 @@ public class PrestamosService
 
     public async Task<Prestamos> Buscar(int prestamoId)
     {
-        return await _contexto.Prestamos.FirstOrDefaultAsync(p => p.PrestamosId == prestamoId);
+        return await _contexto.Prestamos.Include(d => d.Deudor)
+            .FirstOrDefaultAsync(p => p.PrestamosId == prestamoId);
     }
 
     public async Task<bool> Eliminar(int prestamoId)
@@ -55,6 +56,6 @@ public class PrestamosService
 
     public async Task<List<Prestamos>> Listar(Expression<Func<Prestamos, bool>> criterio)
     {
-        return await _contexto.Prestamos.AsNoTracking().Where(criterio).ToListAsync();
+        return await _contexto.Prestamos.Include(d => d.Deudor).AsNoTracking().Where(criterio).ToListAsync();
     }
 }
