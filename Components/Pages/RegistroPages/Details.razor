@@ -7,7 +7,7 @@
 @*HTML*@
 <PageTitle>Details</PageTitle>
 <div class="container">
-    <div class="shadow-lg">
+    <div class="card shadow-lg">
         @*header*@
         <div class="card-header text-center">
             <h5><strong>Datos del prestamo</strong></h5>
@@ -16,7 +16,8 @@
         <div class="card-body">
             <ul>
                 <li><strong>Id: </strong>@Prestamo.PrestamosId</li>
-                <li><strong>Deudor: </strong>@Prestamo.Deudor</li>
+                <li><strong>DeudorId: </strong>@Prestamo.Deudor.DeudorId</li>
+                <li><strong>Deudor: </strong>@Prestamo.Deudor.Nombres</li>
                 <li><strong>Concepto: </strong>@Prestamo.Concepto</li>
                 <li><strong>Monto: </strong>@Prestamo.Monto</li>
             </ul>

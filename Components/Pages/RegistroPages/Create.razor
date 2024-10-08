@@ -1,6 +1,7 @@
 ﻿@page "/Registro/Create"
 
 @inject PrestamosService prestamosService
+@inject DeudoresService deudoresService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
 
@@ -11,26 +12,35 @@
     <ValidationSummary />
 
     <div class="container">
-        <div class="shadow-lg">
+        <div class="card shadow-lg">
+
+
             <div class="card-header text-center">
                 <h5 class="card-title">Crear Prestamo</h5>
             </div>
 
-            <div class="card-body d-flex flex-column align-items-center justify-content-center text-lg-center">
+            <div class="card-body ">
+    
                 @*Deudor*@
-                <div class="col-4 ms-3">
+                <div class="col-6 ms-3">
                     <label class="form-label"><strong>Deudor</strong></label>
-                    <InputText class="form-control" @bind-Value="Prestamo.Deudor"></InputText>
+                    <InputSelect class="form-control" @bind-Value="Prestamo.DeudorId">
+                        <option value="" selected disabled>Elija una opci&oacute;n</option>
+                        @foreach (var deudor in ListaDeudores)
+                        {
+                            <option value="@deudor.DeudorId">@deudor.Nombres</option>
+                        }
+                    </InputSelect>
                     <ValidationMessage For="(() => Prestamo.Deudor)" />
                 </div>
                 @*Concepto*@
-                <div class="col-4 ms-3">
+                <div class="col-6 ms-3">
                     <label class="form-label"><strong>Concepto</strong></label>
                     <InputText class="form-control" @bind-Value="Prestamo.Concepto"></InputText>
                     <ValidationMessage For="(() => Prestamo.Concepto)" />
                 </div>
                 @*Monto*@
-                <div class="col-4 ms-3">
+                <div class="col-6 ms-3">
                     <label class="form-label"><strong>Monto</strong></label>
                     <InputNumber class="form-control" @bind-Value="Prestamo.Monto"></InputNumber>
                     <ValidationMessage For="(() => Prestamo.Monto)" />
@@ -50,6 +60,12 @@
 @code {
     public Prestamos Prestamo { get; set; } = new Prestamos();
     public string Mensaje { get; set; } = string.Empty;
+    public List<Deudores> ListaDeudores { get; set; } = new List<Deudores>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListaDeudores = await deudoresService.Listar(d => d.DeudorId > 0);
+    }
 
     public async Task Guardar()
     {

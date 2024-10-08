@@ -69,7 +69,7 @@
                     {
                         <tr>
                             <td> @prestamo.PrestamosId</td>
-                            <td> @prestamo.Deudor</td>
+                            <td> @prestamo.Deudor.Nombres</td>
                             <td> @prestamo.Concepto</td>
                             <td> @prestamo.Monto</td>
 
@@ -114,7 +114,7 @@
         {
             if (Filtro == "Deudor")
             {
-                ListaPrestamos = await prestamosService.Listar(p => p.Deudor.ToLower().Contains(ValorFiltro.ToLower()));
+                ListaPrestamos = await prestamosService.Listar(p => p.Deudor.Nombres.ToLower().Contains(ValorFiltro.ToLower()));
             }
             else if (Filtro == "Concepto")
             {
