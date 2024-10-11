@@ -136,7 +136,7 @@
     {
         if (nuevoDetalle.ValorCobrado > Cobro.Monto)
         {
-            Mensaje = $"El valor cobrado ({nuevoDetalle.ValorCobrado}) no puede ser mayor que el monto del cobro ({Cobro.Monto}).";
+            Mensaje = $"El valor cobrado ({nuevoDetalle.ValorCobrado}) no puede ser mayor que el monto del cobro ({Cobro.Monto}). Ni que sea igual a cero.";
             return;
         }
 
