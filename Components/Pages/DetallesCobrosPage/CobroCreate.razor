@@ -134,6 +134,12 @@
 
     private void AgregarDetalle()
     {
+        if (nuevoDetalle.ValorCobrado > Cobro.Monto)
+        {
+            Mensaje = $"El valor cobrado ({nuevoDetalle.ValorCobrado}) no puede ser mayor que el monto del cobro ({Cobro.Monto}).";
+            return;
+        }
+
         Cobro.CobroDetalle.Add(new CobroDetalle
             {
                 PrestamoId = nuevoDetalle.PrestamoId,
