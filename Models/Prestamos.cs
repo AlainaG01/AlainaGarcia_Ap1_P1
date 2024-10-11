@@ -11,11 +11,15 @@ public class Prestamos
 
     [Required(ErrorMessage = "Campo obligatorio")]
     [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Solo se permiten letras")]
-    public string Concepto { get; set; }
+    public string? Concepto { get; set; }
 
     [Required(ErrorMessage = "Campo obligatorio")]
     [RegularExpression(@"^\d+(\.\d+)?$", ErrorMessage = "Solo se permiten numeros enteros o decimales")]
     public double Monto { get; set; }
+    
+    [Required(ErrorMessage = "Campo obligatorio")]
+    [RegularExpression(@"^\d+(\.\d+)?$", ErrorMessage = "Solo se permiten numeros enteros o decimales")]
+    public double Balance { get; set; }
 
     [ForeignKey("DeudorId")]
     public int DeudorId { get; set; }
