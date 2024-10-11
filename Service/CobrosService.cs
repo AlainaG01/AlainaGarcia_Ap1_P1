@@ -52,7 +52,7 @@ public class CobrosService
 
     public async Task<bool> Eliminar(int cobroId)
     {
-        return await _contexto.Cobros.Where(c => c.CobroId == cobroId).ExecuteDeleteAsync() > 0;
+        return await _contexto.Cobros.Include(c => c.CobroDetalle).Where(c => c.CobroId == cobroId).ExecuteDeleteAsync() > 0;
     }
 
     public async Task<List<Cobros>> Listar(Expression<Func<Cobros, bool>> criterio)
