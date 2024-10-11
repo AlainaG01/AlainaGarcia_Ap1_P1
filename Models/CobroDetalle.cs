@@ -17,6 +17,6 @@ public class CobroDetalle
     public Prestamos? Prestamo { get; set; }
 
     [Required(ErrorMessage = "Campo obligatorio")]
-    [RegularExpression(@"^\d+(\.\d+)?$", ErrorMessage = "Solo se permiten numeros enteros o decimales")]
+    [RegularExpression("^(?!0(\\.0+)?$)\\d+(\\.\\d+)?$", ErrorMessage = "El valor debe ser un número mayor que cero")]
     public double ValorCobrado { get; set; }
 }
