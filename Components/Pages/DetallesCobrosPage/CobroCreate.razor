@@ -129,6 +129,7 @@
 
         nuevoDetalle.PrestamoId = Prestamo.PrestamosId;
         IdPrestamo = Prestamo.DeudorId;
+        Cobro.Monto = Prestamo.Monto;
         ListaPrestamos = await prestamosService.Listar(p => p.DeudorId == IdPrestamo);
         if(Prestamo?.PrestamosId == 0)
         {
@@ -172,6 +173,8 @@
     public async Task Eliminar(CobroDetalle detalle)
     {
         Cobro.CobroDetalle.Remove(detalle);
+        //
+        nuevoDetalle.ValorCobrado = detalle.ValorCobrado;
     }
 }
 
