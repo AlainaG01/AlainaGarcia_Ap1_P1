@@ -64,7 +64,7 @@
                         <div class="col-4">
                             <label class="form-label"><strong>Préstamo ID</strong></label>
                             
-                            <InputSelect class="form-control" @bind-Value="nuevoDetalle.PrestamoId">
+                            <InputSelect class="form-control" @bind-Value="CobroDetalle.PrestamoId">
                                 <option value="" selected disabled>Elija una opción</option>
                                 @foreach (var prestamo in ListaPrestamos)
                                 {
@@ -75,7 +75,7 @@
                         @* Valor Cobrado *@
                         <div class="col-2">
                             <label class="form-label"><strong>Valor Cobrado</strong></label>
-                            <InputNumber class="form-control" @bind-Value="nuevoDetalle.ValorCobrado"></InputNumber>
+                            <InputNumber class="form-control" @bind-Value="CobroDetalle.ValorCobrado"></InputNumber>
                         </div>
                         <div class="col-4">
                             <button type="button" class="btn btn-success mt-4" @onclick="AgregarDetalle">Agregar Detalle</button>
@@ -109,7 +109,7 @@
     public int CobroId { get; set; }
 
     public Cobros Cobro { get; set; } = new Cobros();
-    public CobroDetalle nuevoDetalle { get; set; } = new CobroDetalle();
+    public CobrosDetalle CobroDetalle { get; set; } = new CobrosDetalle();
     public string Mensaje { get; set; } = string.Empty;
     public List<Deudores> ListaDeudores { get; set; } = new List<Deudores>();
     public List<Prestamos> ListaPrestamos { get; set; } = new List<Prestamos>();
@@ -125,7 +125,7 @@
     {
         var Prestamo = await prestamosService.BuscarPrestamo(Cobro.DeudorId);
 
-        nuevoDetalle.PrestamoId = Prestamo.PrestamosId;
+        CobroDetalle.PrestamoId = Prestamo.PrestamosId;
         IdPrestamo = Prestamo.DeudorId;
         Cobro.Monto = Prestamo.Monto;
         ListaPrestamos = await prestamosService.Listar(p => p.DeudorId == IdPrestamo);
@@ -138,19 +138,19 @@
 
     private void AgregarDetalle()
     {
-        if (nuevoDetalle.ValorCobrado > Cobro.Monto)
+        if (CobroDetalle.ValorCobrado > Cobro.Monto)
         {
-            Mensaje = $"El valor cobrado ({nuevoDetalle.ValorCobrado}) no puede ser mayor que el monto del cobro ({Cobro.Monto}). Ni que sea igual a cero.";
+            Mensaje = $"El valor cobrado ({CobroDetalle.ValorCobrado}) no puede ser mayor que el monto del cobro ({Cobro.Monto}). Ni que sea igual a cero.";
             return;
         }
 
-        Cobro.CobroDetalle.Add(new CobroDetalle
+        Cobro.CobroDetalle.Add(new CobrosDetalle
             {
-                PrestamoId = nuevoDetalle.PrestamoId,
-                ValorCobrado = nuevoDetalle.ValorCobrado
+                PrestamoId = CobroDetalle.PrestamoId,
+                ValorCobrado = CobroDetalle.ValorCobrado
             });
 
-        nuevoDetalle = new CobroDetalle();
+        CobroDetalle = new CobrosDetalle();
     }
 
     public async Task Modificar()
@@ -168,7 +168,7 @@
         }
     }
 
-    public async Task Eliminar(CobroDetalle detalle)
+    public async Task Eliminar(CobrosDetalle detalle)
     {
         Cobro.CobroDetalle.Remove(detalle);
     }

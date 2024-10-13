@@ -70,7 +70,7 @@ namespace AlainaGarcia_Ap1_P1.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CobroDetalle",
+                name: "CobrosDetalle",
                 columns: table => new
                 {
                     DetalleId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -108,12 +108,12 @@ namespace AlainaGarcia_Ap1_P1.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_CobroDetalle_CobroId",
-                table: "CobroDetalle",
+                table: "CobrosDetalle",
                 column: "CobroId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CobroDetalle_PrestamoId",
-                table: "CobroDetalle",
+                table: "CobrosDetalle",
                 column: "PrestamoId");
 
             migrationBuilder.CreateIndex(
@@ -131,7 +131,7 @@ namespace AlainaGarcia_Ap1_P1.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CobroDetalle");
+                name: "CobrosDetalle");
 
             migrationBuilder.DropTable(
                 name: "Cobros");

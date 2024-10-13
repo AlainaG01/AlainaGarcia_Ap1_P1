@@ -20,7 +20,7 @@ namespace AlainaGarcia_Ap1_P1.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
-            modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.CobroDetalle", b =>
+            modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.CobrosDetalle", b =>
                 {
                     b.Property<int>("DetalleId")
                         .ValueGeneratedOnAdd()
@@ -41,7 +41,7 @@ namespace AlainaGarcia_Ap1_P1.Migrations
 
                     b.HasIndex("PrestamoId");
 
-                    b.ToTable("CobroDetalle");
+                    b.ToTable("CobrosDetalle");
                 });
 
             modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.Cobros", b =>
@@ -124,10 +124,10 @@ namespace AlainaGarcia_Ap1_P1.Migrations
                     b.ToTable("Prestamos");
                 });
 
-            modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.CobroDetalle", b =>
+            modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.CobrosDetalle", b =>
                 {
                     b.HasOne("AlainaGarcia_Ap1_P1.Models.Cobros", "Cobro")
-                        .WithMany("CobroDetalle")
+                        .WithMany("CobrosDetalle")
                         .HasForeignKey("CobroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -167,7 +167,7 @@ namespace AlainaGarcia_Ap1_P1.Migrations
 
             modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.Cobros", b =>
                 {
-                    b.Navigation("CobroDetalle");
+                    b.Navigation("CobrosDetalle");
                 });
 #pragma warning restore 612, 618
         }

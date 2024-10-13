@@ -19,5 +19,5 @@ public class Cobros
     public double Monto { get; set; }
 
     [ForeignKey("CobroId")]
-    public ICollection<CobroDetalle> CobroDetalle { get; set; } = new List<CobroDetalle>();
+    public ICollection<CobrosDetalle> CobroDetalle { get; set; } = new List<CobrosDetalle>();
 }
