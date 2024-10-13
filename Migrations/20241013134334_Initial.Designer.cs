@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlainaGarcia_Ap1_P1.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20241011184954_Initial")]
+    [Migration("20241013134334_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -19,6 +19,28 @@ namespace AlainaGarcia_Ap1_P1.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
+
+            modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.Cobros", b =>
+                {
+                    b.Property<int>("CobroId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DeudorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Monto")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("CobroId");
+
+                    b.HasIndex("DeudorId");
+
+                    b.ToTable("Cobros");
+                });
 
             modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.CobrosDetalle", b =>
                 {
@@ -41,29 +63,7 @@ namespace AlainaGarcia_Ap1_P1.Migrations
 
                     b.HasIndex("PrestamoId");
 
-                    b.ToTable("CobrosDetalle");
-                });
-
-            modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.Cobros", b =>
-                {
-                    b.Property<int>("CobroId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DeudorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("Monto")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("CobroId");
-
-                    b.HasIndex("DeudorId");
-
-                    b.ToTable("Cobros");
+                    b.ToTable("CobroDetalle");
                 });
 
             modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.Deudores", b =>
@@ -124,10 +124,21 @@ namespace AlainaGarcia_Ap1_P1.Migrations
                     b.ToTable("Prestamos");
                 });
 
+            modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.Cobros", b =>
+                {
+                    b.HasOne("AlainaGarcia_Ap1_P1.Models.Deudores", "Deudor")
+                        .WithMany()
+                        .HasForeignKey("DeudorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Deudor");
+                });
+
             modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.CobrosDetalle", b =>
                 {
                     b.HasOne("AlainaGarcia_Ap1_P1.Models.Cobros", "Cobro")
-                        .WithMany("CobrosDetalle")
+                        .WithMany("CobroDetalle")
                         .HasForeignKey("CobroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -143,17 +154,6 @@ namespace AlainaGarcia_Ap1_P1.Migrations
                     b.Navigation("Prestamo");
                 });
 
-            modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.Cobros", b =>
-                {
-                    b.HasOne("AlainaGarcia_Ap1_P1.Models.Deudores", "Deudor")
-                        .WithMany()
-                        .HasForeignKey("DeudorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Deudor");
-                });
-
             modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.Prestamos", b =>
                 {
                     b.HasOne("AlainaGarcia_Ap1_P1.Models.Deudores", "Deudor")
@@ -167,7 +167,7 @@ namespace AlainaGarcia_Ap1_P1.Migrations
 
             modelBuilder.Entity("AlainaGarcia_Ap1_P1.Models.Cobros", b =>
                 {
-                    b.Navigation("CobrosDetalle");
+                    b.Navigation("CobroDetalle");
                 });
 #pragma warning restore 612, 618
         }
