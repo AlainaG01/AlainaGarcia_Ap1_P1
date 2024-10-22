@@ -18,4 +18,11 @@ public class DeudoresService
     {
         return await _contexto.Deudores.AsNoTracking().Where(criterio).ToListAsync();
     }
+
+    public async Task<Deudores> Buscar(int deudorId)
+    {
+        return await _contexto.Deudores
+            .AsNoTracking()
+            .FirstOrDefaultAsync(d => d.DeudorId == deudorId);
+    }
 }
