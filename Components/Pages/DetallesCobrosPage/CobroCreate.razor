@@ -50,19 +50,6 @@
                     <ValidationMessage For="(() => Cobro.DeudorId)" />
                 </div>
 
-                @* Monto *@
-                <div class="col-6 ms-3">
-                    <label class="form-label"><strong>Monto</strong></label>
-                    <InputSelect class="form-control" @bind-Value="Cobro.Monto">
-                        <option value="" selected disabled>Elija una opción</option>
-                        @foreach (var prestamo in ListaPrestamos)
-                        {
-                            <option value="@prestamo.Monto">PrestamoId @prestamo.PrestamosId - $ @prestamo.Monto</option>
-                        }
-                    </InputSelect>
-                    <ValidationMessage For="(() => Cobro.Monto)" />
-                </div>
-
                 @* Detalles del Cobro *@
                 <div class="border border-success p-3 mt-3">
                     <h5>Detalles del Cobro</h5>
@@ -95,6 +82,17 @@
                         </tbody>
                     </table>
                     <hr />
+                </div>
+                @*Monto*@
+                <div class="row">
+                    <div class="col-6 offset-6">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Monto</strong></label>
+                            <label class="form-control text-end"><strong>@Cobro.Monto</strong></label>
+
+                            <ValidationMessage For="(() => Cobro.Monto)" />
+                        </div>
+                    </div>
                 </div>
             </div>
 
