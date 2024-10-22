@@ -32,13 +32,18 @@
                 @* Deudor *@
                 <div class="mb-3">
                     <label class="form-label"><strong>Deudor</strong></label>
-                    <InputSelect class="form-control" @bind-Value="Cobro.DeudorId">
-                        <option value="" selected disabled>Elija una opción</option>
-                        @foreach (var deudor in ListaDeudores)
-                        {
-                            <option value="@deudor.DeudorId">@deudor.Nombres</option>
-                        }
-                    </InputSelect>
+
+                    <div class="input-group">
+
+                        <InputSelect class="form-control form-select" @bind-Value="Cobro.DeudorId">
+                            <option value="" selected disabled>Elija una opción</option>
+                            @foreach (var deudor in ListaDeudores)
+                            {
+                                <option value="@deudor.DeudorId">@deudor.Nombres</option>
+                            }
+                        </InputSelect>
+                    </div>
+                    
                     <ValidationMessage For="(() => Cobro.DeudorId)" />
                     <p>Deudor seleccionado: @Cobro.DeudorId</p>
                 </div>
