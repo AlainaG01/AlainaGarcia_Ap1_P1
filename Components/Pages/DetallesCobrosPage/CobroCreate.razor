@@ -120,6 +120,7 @@
     {
         ListaDeudores = await deudoresService
             .Listar(d => d.DeudorId > 0);
+        Cobro.Fecha = DateTime.Now;
     }
 
     public async Task BuscarPrestamosPendientes()
