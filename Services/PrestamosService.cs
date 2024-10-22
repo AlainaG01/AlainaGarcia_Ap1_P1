@@ -64,4 +64,23 @@ public class PrestamosService
     {
         return await _contexto.Prestamos.Include(p => p.Deudor).FirstOrDefaultAsync(p => p.DeudorId == id);
     }
+
+    public async Task<List<Prestamos>> GetList(Expression<Func<Prestamos, bool>> criterio)
+    {
+        return await _contexto.Prestamos
+            .Include(d => d.Deudor)
+            .Where(criterio)
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
+    public async Task<List<Prestamos>> GetPrestamosPendientes(int deudorId)
+    {
+        return await _contexto.Prestamos
+            .Where(p => p.DeudorId == deudorId && p.Balance > 0)
+            .OrderBy(p => p.PrestamosId)
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
 }

@@ -131,8 +131,7 @@
 
     public async Task BuscarPrestamosPendientes()
     {
-        ListaPrestamos = await prestamosService
-            .GetPrestamosPendientes(Cobro.DeudorId);
+        ListaPrestamos = await prestamosService.GetPrestamosPendientes(Cobro.DeudorId);
     }
 
     private void AgregarDetalle()
