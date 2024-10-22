@@ -36,7 +36,7 @@
                     <div class="input-group">
 
                         <InputSelect class="form-control form-select" @bind-Value="Cobro.DeudorId">
-                            <option value="" selected disabled>Elija una opción</option>
+                            <option value="0" selected disabled>Elija una opción</option>
                             @foreach (var deudor in ListaDeudores)
                             {
                                 <option value="@deudor.DeudorId">@deudor.Nombres</option>
