@@ -90,7 +90,7 @@
                             <InputNumber class="form-control" @bind-Value="DetalleSeleccionado.ValorCobrado"></InputNumber>
                         </div>
                         <div class="col-4">
-                            <button type="button" class="btn btn-success mt-4" @onclick="AgregarDetalle">Agregar Detalle</button>
+                            @* <button type="button" class="btn btn-success mt-4" @onclick="AgregarDetalle">Agregar Detalle</button> *@
                         </div>
                     </div>
 
@@ -134,24 +134,20 @@
         ListaPrestamos = await prestamosService.GetPrestamosPendientes(Cobro.DeudorId);
     }
 
-    private void AgregarDetalle()
+    private async Task HandlePrestamoSelected((Prestamos prestamo, double valor) selection)
     {
-        if (DetalleSeleccionado.ValorCobrado > Cobro.Monto)
-        {
-            Mensaje = $"El valor cobrado ({DetalleSeleccionado.ValorCobrado}) no puede ser mayor que el monto del cobro ({Cobro.Monto}). Ni que sea igual a cero.";
-            return;
-        }
-
-        Cobro.CobroDetalle.Add(new CobrosDetalle
+        var detalle = new CobrosDetalle
             {
-                PrestamoId = DetalleSeleccionado.PrestamoId,
-                ValorCobrado = DetalleSeleccionado.ValorCobrado
-            });
+                PrestamoId = selection.prestamo.PrestamosId,
+                ValorCobrado = selection.valor
+            };
+
+        Cobro.CobroDetalle.Add(detalle);
+        Cobro.Monto = Cobro.CobroDetalle.Sum(d => d.ValorCobrado);
 
         DetalleSeleccionado = new CobrosDetalle();
+        await Task.CompletedTask;
     }
-
-    
 
     public async Task Guardar()
     {
