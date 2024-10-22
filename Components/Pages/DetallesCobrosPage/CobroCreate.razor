@@ -76,7 +76,7 @@
                         <div class="col-4">
                             <label class="form-label"><strong>Préstamo ID</strong></label>
                             
-                            <InputSelect class="form-control" @bind-Value="CobroDetalle.PrestamoId">
+                            <InputSelect class="form-control" @bind-Value="DetalleSeleccionado.PrestamoId">
                                 <option value="" selected disabled>Elija una opción</option>
                                 @foreach (var prestamo in ListaPrestamos)
                                 {
@@ -87,7 +87,7 @@
                         @* Valor Cobrado *@
                         <div class="col-2">
                             <label class="form-label"><strong>Valor Cobrado</strong></label>
-                            <InputNumber class="form-control" @bind-Value="CobroDetalle.ValorCobrado"></InputNumber>
+                            <InputNumber class="form-control" @bind-Value="DetalleSeleccionado.ValorCobrado"></InputNumber>
                         </div>
                         <div class="col-4">
                             <button type="button" class="btn btn-success mt-4" @onclick="AgregarDetalle">Agregar Detalle</button>
@@ -118,7 +118,7 @@
 
 @code {
     public Cobros Cobro { get; set; } = new Cobros();
-    public CobrosDetalle CobroDetalle { get; set; } = new CobrosDetalle();
+    public CobrosDetalle DetalleSeleccionado { get; set; } = new();
     public string Mensaje { get; set; } = string.Empty;
     public List<Deudores> ListaDeudores { get; set; } = new List<Deudores>();
     public List<Prestamos> ListaPrestamos { get; set; } = new List<Prestamos>();
@@ -136,20 +136,22 @@
 
     private void AgregarDetalle()
     {
-        if (CobroDetalle.ValorCobrado > Cobro.Monto)
+        if (DetalleSeleccionado.ValorCobrado > Cobro.Monto)
         {
-            Mensaje = $"El valor cobrado ({CobroDetalle.ValorCobrado}) no puede ser mayor que el monto del cobro ({Cobro.Monto}). Ni que sea igual a cero.";
+            Mensaje = $"El valor cobrado ({DetalleSeleccionado.ValorCobrado}) no puede ser mayor que el monto del cobro ({Cobro.Monto}). Ni que sea igual a cero.";
             return;
         }
 
         Cobro.CobroDetalle.Add(new CobrosDetalle
             {
-                PrestamoId = CobroDetalle.PrestamoId,
-                ValorCobrado = CobroDetalle.ValorCobrado
+                PrestamoId = DetalleSeleccionado.PrestamoId,
+                ValorCobrado = DetalleSeleccionado.ValorCobrado
             });
 
-        CobroDetalle = new CobrosDetalle();
+        DetalleSeleccionado = new CobrosDetalle();
     }
+
+    
 
     public async Task Guardar()
     {
@@ -170,7 +172,7 @@
     {
         Cobro.CobroDetalle.Remove(detalle);
         //
-        CobroDetalle.ValorCobrado = detalle.ValorCobrado;
+        DetalleSeleccionado.ValorCobrado = detalle.ValorCobrado;
     }
 }
 
