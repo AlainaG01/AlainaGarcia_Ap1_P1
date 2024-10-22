@@ -118,7 +118,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        ListaDeudores = await deudoresService.Listar(d => d.DeudorId > 0);
+        ListaDeudores = await deudoresService
+            .Listar(d => d.DeudorId > 0);
     }
 
     public async Task BuscarPrestamosPendientes()
