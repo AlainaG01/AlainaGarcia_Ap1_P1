@@ -42,6 +42,8 @@
                                 <option value="@deudor.DeudorId">@deudor.Nombres</option>
                             }
                         </InputSelect>
+
+                        
                     </div>
                     
                     <ValidationMessage For="(() => Cobro.DeudorId)" />
@@ -69,7 +71,7 @@
                     <div class="row">
                         <div class="col-2">
                             <label class="form-label"><strong>Buscar Id</strong></label>
-                            <button type="button" class="btn btn-primary" @onclick="Buscar">Buscar</button>
+                            <button type="button" class="btn btn-primary" @onclick="BuscarPrestamosPendientes">Buscar</button>
                         </div>
                         <div class="col-4">
                             <label class="form-label"><strong>Préstamo ID</strong></label>
@@ -127,20 +129,11 @@
         ListaDeudores = await deudoresService.Listar(d => d.DeudorId > 0);
     }
 
-    public async Task Buscar()
+    public async Task BuscarPrestamosPendientes()
     {
-        var Prestamo = await prestamosService.BuscarPrestamo(Cobro.DeudorId);
-
-        CobroDetalle.PrestamoId = Prestamo.PrestamosId;
-        IdPrestamo = Prestamo.DeudorId;
-        Cobro.Monto = Prestamo.Monto;
-        ListaPrestamos = await prestamosService.Listar(p => p.DeudorId == IdPrestamo);
-        if(Prestamo?.PrestamosId == 0)
-        {
-            Prestamo.PrestamosId = 0;
-        }
+        ListaPrestamos = await prestamosService
+            .GetPrestamosPendientes(Cobro.DeudorId);
     }
-
 
     private void AgregarDetalle()
     {
