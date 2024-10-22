@@ -98,7 +98,7 @@
                         @foreach (var detalle in Cobro.CobroDetalle)
                         {
                             <li class="mt-2">Préstamo ID: @detalle.PrestamoId, Valor Cobrado: @detalle.ValorCobrado
-                                <button type="button" @onclick="() => Eliminar(detalle)" class="btn btn-outline-danger btn-sm ms-2">Eliminar</button>
+                                <button type="button" @onclick="() => RemoverDetalle(detalle)" class="btn btn-outline-danger btn-sm ms-2">Eliminar</button>
                             </li>
                         }
                     </ul>
@@ -164,11 +164,11 @@
         }
     }
 
-    public async Task Eliminar(CobrosDetalle detalle)
+    public async Task RemoverDetalle(CobrosDetalle detalle)
     {
         Cobro.CobroDetalle.Remove(detalle);
         //
-        DetalleSeleccionado.ValorCobrado = detalle.ValorCobrado;
+        DetalleSeleccionado = detalle;
     }
 }
 
