@@ -72,15 +72,29 @@
                         Valor="DetalleSeleccionado.ValorCobrado"
                         OnPrestamoSelected="HandlePrestamoSelected" />
                         <hr />
-
-                    <ul class="mt-3">
-                        @foreach (var detalle in Cobro.CobroDetalle)
-                        {
-                            <li class="mt-2">Préstamo ID: @detalle.PrestamoId, Valor Cobrado: @detalle.ValorCobrado
-                                <button type="button" @onclick="() => RemoverDetalle(detalle)" class="btn btn-outline-danger btn-sm ms-2">Eliminar</button>
-                            </li>
-                        }
-                    </ul>
+                    <table class="table table-light">
+                        <thead class="table table-striped">
+                            <tr class="text-center">
+                                <th>Pr&eacute;stamo</th>
+                                <th>Cobrado</th>
+                                <th>Remover</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var detalle in Cobro.CobroDetalle)
+                            {
+                                <tr>
+                                    <td>@detalle.PrestamoId</td>
+                                    <td>@detalle.ValorCobrado</td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-danger bi bi-trash"
+                                                @onclick="() => RemoverDetalle(detalle)"></button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <hr />
                 </div>
             </div>
 
